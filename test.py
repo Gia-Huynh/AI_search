@@ -82,7 +82,7 @@ def DFS (gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y):
             #[0] = x; [1] = y;
         except:
             return result
-        print (result)
+        #print (result)
         for direction in steps:
             if (0<=(nigger + direction)[0] < M) and (0<=(nigger + direction)[1] < N):
                 x, y = (nigger + direction)
@@ -97,11 +97,52 @@ def DFS (gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y):
                 continue
             visited[nigger[1]][nigger[0]] = 1
     return result
+
+def BFS (gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y):
+    N = len (gay_map)
+    M = len (gay_map[0])
+
+    visited = np.full_like(gay_map, 0)
+    # 0: Not visited yet
+    # 1: Visited
+    # 2: Visiting (in queue)
     
+    result = np.full_like(gay_map, 0)
+    # Cost of traversal to location [y][x]
+    
+    steps = np.array([[1,0],[-1,0],[0,1],[0,-1]])
+    
+    queue = deque()
+    queue.append ((start_x, start_y))
+    x = 0
+    y = 0
+    while (True):
+        try:
+            nigger = queue.popleft()
+            #[0] = x; [1] = y;
+        except:
+            return result
+        for direction in steps:
+            if (0<=(nigger + direction)[0] < M) and (0<=(nigger + direction)[1] < N):
+                x, y = (nigger + direction)
+                if (gay_map[y][x]==0):
+                    continue
+                if (visited[y][x]==0) or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
+                    result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+                    if (visited[y][x]!=2):
+                        visited[y][x] = 2
+                        queue.append((x, y))
+            else:
+                continue
+            visited[nigger[1]][nigger[0]] = 1
+    return result
+
 if __name__ == "__main__":
     gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = ReadFile ("maze.txt")
     gay_map = np.array(gay_map)
     dfs = DFS (gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y)
-    #print (dfs)
+    bfs = BFS (gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y)
+    print (dfs)
+    print (bfs)
 
     
