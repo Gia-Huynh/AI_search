@@ -79,7 +79,9 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
                 continue
             visited[nigger[1]][nigger[0]] = 1
         trace.append(curr)
-    print (trace)
+    #print (trace)
+    for a in trace:
+        print (a)
     return result
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
