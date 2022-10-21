@@ -21,7 +21,7 @@ def DFS_rec (gay_map , curr_x, curr_y, result,route):
             if (y,x) not in route:
                 route.append((y,x))
             result[y][x] = result[curr_y][curr_x] + gay_map[y][x]
-            if (DFS_rec(gay_map , x, y, result)==1):
+            if (DFS_rec(gay_map , x, y, result, route)==1):
                 return 1
             elif(DFS_rec(gay_map, x, y, result, route)==-1):
                 route.pop()
@@ -36,7 +36,7 @@ def DFS (gay_map , start_x, start_y, exit_x, exit_y,route):
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
     return result
 
-def BFS (gay_map , start_x, start_y, exit_x, exit_y,trace):
+def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
     N = len (gay_map)
     M = len (gay_map[0])
 
@@ -79,6 +79,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y,trace):
                 continue
             visited[nigger[1]][nigger[0]] = 1
         trace.append(curr)
+    print (trace)
     return result
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
