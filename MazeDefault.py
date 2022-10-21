@@ -2,7 +2,7 @@ import numpy as np
 from collections import deque
 from queue import PriorityQueue
 gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
-def DFS_rec (gay_map , curr_x, curr_y, result):
+def DFS_rec (gay_map , curr_x, curr_y, result,route):
     N = len (gay_map)
     M = len (gay_map[0])
     steps = np.array([[1,0],[-1,0],[0,1],[0,-1]])
@@ -18,15 +18,20 @@ def DFS_rec (gay_map , curr_x, curr_y, result):
             if ((gay_map[y][x]==0) or (result[y][x]<=result[curr_y][curr_x])):
                 continue
             #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
+            if (y,x) not in route:
+                route.append((y,x))
             result[y][x] = result[curr_y][curr_x] + gay_map[y][x]
             if (DFS_rec(gay_map , x, y, result)==1):
                 return 1
+            elif(DFS_rec(gay_map, x, y, result, route)==-1):
+                route.pop()
             result[y][x] = N * M + 1
     return -1
-def DFS (gay_map , start_x, start_y, exit_x, exit_y):
+def DFS (gay_map , start_x, start_y, exit_x, exit_y,route):
+    route.append((start_y,start_x))
     result = np.full_like(gay_map, len (gay_map)*len (gay_map[0])+1)
     result[start_y][start_x] = 1
-    dfs_output = DFS_rec (gay_map , start_x, start_y, result)
+    dfs_output = DFS_rec (gay_map , start_x, start_y, result,route)
     #print (dfs_output)
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
     return result
