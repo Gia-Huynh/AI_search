@@ -36,7 +36,7 @@ def DFS (gay_map , start_x, start_y, exit_x, exit_y,route):
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
     return result
 
-def BFS (gay_map , start_x, start_y, exit_x, exit_y):
+def BFS (gay_map , start_x, start_y, exit_x, exit_y,trace):
     N = len (gay_map)
     M = len (gay_map[0])
 
@@ -54,12 +54,15 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
     queue.append ((start_x, start_y))
     x = 0
     y = 0
-    while (True):
+
+    trace = []
+    while (queue):
         try:
             nigger = queue.popleft()
             #[0] = x; [1] = y;
         except:
             return result
+        curr = []
         for direction in steps:
             if (0<=(nigger + direction)[0] < M) and (0<=(nigger + direction)[1] < N):
                 x, y = (nigger + direction)
@@ -67,6 +70,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
                     continue
                 if (visited[y][x]==0):
                 #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
+                    curr.append((y,x))
                     result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
                     if (visited[y][x]!=2):
                         visited[y][x] = 2
@@ -74,6 +78,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
             else:
                 continue
             visited[nigger[1]][nigger[0]] = 1
+        trace.append(curr)
     return result
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
