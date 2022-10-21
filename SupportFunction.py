@@ -19,9 +19,9 @@ def ReadFile (filename):
         for i in range (0, n):
             gay = f.readline().split()
             if (gay[2] == "0"):
-                forceP.append (gay[0:1])
+                forceP.append ([int (n) for n in gay[0:2]])
             else:
-                bonusP.append (gay[0:2])
+                bonusP.append ([int (n) for n in gay[0:3]])
         gay = f.readline().rstrip('\r\n')
         while(gay != ''):
             map_line = [gay_dict[t] for t in gay]

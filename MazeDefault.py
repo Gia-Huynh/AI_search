@@ -61,8 +61,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
                 if (gay_map[y][x]==0):
                     continue
                 if (visited[y][x]==0):
-                #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
-                    result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+                   result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
                     if (visited[y][x]!=2):
                         visited[y][x] = 2
                         queue.append((x, y))
