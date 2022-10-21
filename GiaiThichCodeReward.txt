@@ -1,0 +1,12 @@
+Tạo ma trận khoảng cách giữa: [điểm bắt đầu, điểm kết thúc, các điểm thưởng]
+
+Sau đó BFS từ điểm bắt đầu đến điểm kết thúc, có thể qua các điểm thưởng hoặc điểm kết thúc.
+
+Tại mỗi điểm trong đó, chỉ có 2 lựa chọn, đến một điểm đặc biệt chưa thăm, hoặc đến thẳng điểm kết thúc.
+
+Chứng minh:
+	- Tại A là điểm đặc biệt, A tìm điểm tối ưu tiếp theo để thăm.
+
+	- Đoạn đường từ A đi thẳng đến điểm kết thúc có điểm đặc biệt => A đi tới điểm đặc biệt đó rồi tới điểm kết thúc sẽ có chi phí thấp hơn do hưởng điểm từ điểm trung gian => Đến một điểm đặc biệt chưa thăm.
+	- Điểm tối ưu là một điểm đặc biệt đã thăm => Không được hưởng điểm => Đó chỉ là một điểm bình thường => Nằm trên đoạn đường từ A đi thẳng đến điểm kết thúc.
+	- Điểm tối ưu là một điểm bình thường không đặc biệt => Nằm trên đoạn đường từ A đi thẳng đến điểm kết thúc.

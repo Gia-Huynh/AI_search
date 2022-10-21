@@ -70,13 +70,13 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
                     continue
                 if (visited[y][x]==0):
                     curr.append((y,x))
-                    result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+                    result[y][x] = result[nigger[1]][nigger[0]]+1
 
                     #Check if y, x is exit
                     if (x, y) == (exit_x, exit_y):
                         trace.append(curr)
-                        for a in trace:
-                            print (a)
+                        #for a in trace:
+                        #    print (a)
                         return result
                     
                     if (visited[y][x]!=2):
