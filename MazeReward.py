@@ -8,26 +8,52 @@ def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     SpecialP.insert (0, [start_y, start_x, 0])
     SpecialP.append ([exit_y, exit_x, 0])
     trace =[]
-    print (SpecialP)
-    #[Start, specialP, specialP, specialP, Exit]
+    #print (SpecialP)
     num = len(SpecialP)
     gae = np.zeros ((num, num), dtype = np.int8)
-    #B tham A
     for b in range (0, num-1):
-        #gae[b, b] = 99
         for a in range (b+1, num):
             gae[b, a] = SpecialP[a][2] + MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[a][1], SpecialP[a][0], trace)[SpecialP[a][0]][SpecialP[a][1]]
-            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]
-            #print (SpecialP[b]," ",SpecialP[a]," ",SpecialP[a][2]," ",gae[b, a] - SpecialP[a][2])
-            pass
-            
-        #print(MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[2][1], SpecialP[2][0], trace))
-    #gae[num-1, num-1] = 99
-    return gae
+            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]            
+    return gae, num, SpecialP
 def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
-    DistanceArr = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
-    print (DistanceArr)
-    return DistanceArr
+    #Distance Array
+    DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+    print (DisArr)
+    Cost = np.full(num, np.amax(DisArr)+1)
+    print (Cost)
+    Cost[0] = 0;
+
+    #DFS
+    visited = np.zeros((num, num), dtype = np.int8)
+    InQueue = np.zeros(num, dtype = np.int8)
+    visited[:,0] = 1;
+    queue = deque()
+    queue.append (0)
+    InQueue[0] = 1;
+    trace = np.zeros(num, dtype = np.int8)
+    while (queue):
+        try:
+            curr_node = queue.popleft()
+        except Exception as e:
+            break
+            pass
+        for i in range (0, num):
+            if (visited[curr_node,i]==0):
+                if (Cost[i] > Cost[curr_node]+DisArr[curr_node, i]):
+                    Cost[i] = Cost[curr_node]+DisArr[curr_node, i]
+                    visited[i] = visited[curr_node]
+                    visited[i][curr_node] = 0
+                    trace[i] = curr_node
+                    
+                    if (InQueue[i]==0):
+                        queue.append(i)
+                        InQueue[i] = 1
+        InQueue[i] = 0
+    #END DFS
+    print (Cost)
+    print (trace)
+    return Cost, trace
 
 
 if __name__ == "__main__":
