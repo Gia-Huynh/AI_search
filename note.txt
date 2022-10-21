@@ -1,0 +1,4 @@
+Vì để đi khoảng cách X trong đồ thị 2D ta cần đi:
+- Đường chéo: tổng cộng 2*X bước.
+- Ngang hoặc dọc: X bước.
+Nên hàm Heuristic#1 không phù hợp với thuật toán Astar, thay bằng hàm Heuristic#2
