@@ -55,7 +55,8 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
     x = 0
     y = 0
 
-    trace = []
+    gay_trace = np.zeros((N,M,2), dtype = np.int8)
+    path = []
     while (queue):
         try:
             nigger = queue.popleft()
@@ -74,18 +75,45 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
 
                     #Check if y, x is exit
                     if (x, y) == (exit_x, exit_y):
-                        trace.append(curr)
-                        #for a in trace:
-                        #    print (a)
+                        path.append(curr)
+                        #print ("GAY")
+                        gay_trace[y][x][0] = nigger[0]
+                        gay_trace[y][x][1] = nigger[1]
+                        
+                        x = exit_x
+                        y = exit_y
+                        #print (exit_x, exit_y)
+                        temp = 0
+                        while not((x==0) and (y==0)):
+                            trace.append((x, y))
+                            #print (x, y)
+                            temp = gay_trace[y][x][0]
+                            y = gay_trace[y][x][1]
+                            x = temp
+                        trace.reverse()                        
                         return result
                     
                     if (visited[y][x]!=2):
+                        gay_trace[y][x][0] = nigger[0]
+                        gay_trace[y][x][1] = nigger[1]
+                        #[0] = x; [1] = y;
                         visited[y][x] = 2
                         queue.append((x, y))
             else:
                 continue
             visited[nigger[1]][nigger[0]] = 1
-        trace.append(curr)
+        path.append(curr)
+        
+    x = exit_x
+    y = exit_y
+    temp = 0
+    trade = []
+    while ((x!=0) and (y!=0)):
+        trace.append((x, y))
+        temp = gay_trace[y][x][0]
+        y = gay_trace[y][x][1]
+        x = temp
+        
     return result
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
