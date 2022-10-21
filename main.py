@@ -2,6 +2,7 @@ import numpy as np
 from collections import deque
 from queue import PriorityQueue
 import MazeDefault
+import MazeReward
 import SupportFunction
 #gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
 
@@ -12,6 +13,7 @@ if __name__ == "__main__":
     route = []
     gay_map = np.array(gay_map)
     if (len(bonusP)!=0):
+        MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
         pass
     elif (len(forceP)!=0):
         pass
