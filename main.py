@@ -5,9 +5,9 @@ import MazeDefault
 import MazeReward
 import SupportFunction
 #gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
-
+FileName = "maze.txt"
 if __name__ == "__main__":
-    gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile ("maze.txt")
+    gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (FileName)
     route = []
     gay_map = np.array(gay_map)
     if (len(bonusP)!=0):
