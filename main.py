@@ -16,8 +16,8 @@ if __name__ == "__main__":
     elif (len(forceP)!=0):
         pass
     else:
-        dfs = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y, route)
-        route = []
+        #dfs = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y, route)
+        #route = []
         MazeDefault.BFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y, route)
         print (" ")
         print (route)

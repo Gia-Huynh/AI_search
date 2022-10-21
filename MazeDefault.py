@@ -69,9 +69,16 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
                 if (gay_map[y][x]==0):
                     continue
                 if (visited[y][x]==0):
-                #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
                     curr.append((y,x))
                     result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+
+                    #Check if y, x is exit
+                    if (x, y) == (exit_x, exit_y):
+                        trace.append(curr)
+                        for a in trace:
+                            print (a)
+                        return result
+                    
                     if (visited[y][x]!=2):
                         visited[y][x] = 2
                         queue.append((x, y))
@@ -79,9 +86,6 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
                 continue
             visited[nigger[1]][nigger[0]] = 1
         trace.append(curr)
-    #print (trace)
-    for a in trace:
-        print (a)
     return result
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
@@ -101,6 +105,8 @@ def UCS (gay_map , start_x, start_y, exit_x, exit_y):
     while (True):
         try:
             nigger = queue.get(block = False)[1]
+            if (nigger[0], nigger[1]) == (exit_x, exit_y):
+                return result
             #[0] = x; [1] = y;
         except:
             return result
