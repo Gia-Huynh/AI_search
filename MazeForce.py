@@ -17,14 +17,18 @@ def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
             gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]            
     return gae, num, SpecialP
 
-def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
+def DFS_MazeForce ():
+
+def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     #Distance Array
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+
+
     #print (DisArr)
     Cost = np.full(num, np.amax(DisArr)+1)
     Cost[0] = 0;
 
-    #DFS
+    #BFS
     visited = np.zeros((num, num), dtype = np.int8)
     InQueue = np.zeros(num, dtype = np.int8)
     visited[:,0] = 1;
@@ -52,7 +56,7 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
         InQueue[i] = 0
     #print (Cost)
     #print (trace)
-    #END DFS
+    #END BFS
     BFS_Trace = []
     BFS_Trace_temp = []
     not_reached_end = True
