@@ -2,7 +2,8 @@ import numpy as np
 from collections import deque
 from queue import PriorityQueue
 gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
-def DFS_rec (gay_map , curr_x, curr_y, result,route):
+def DFS_rec (gay_map , curr_x, curr_y, result):
+    route = []
     N = len (gay_map)
     M = len (gay_map[0])
     steps = np.array([[1,0],[-1,0],[0,1],[0,-1]])
@@ -20,23 +21,26 @@ def DFS_rec (gay_map , curr_x, curr_y, result,route):
             #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
             if (y,x) not in route:
                 route.append((y,x))
-            result[y][x] = result[curr_y][curr_x] + gay_map[y][x]
-            if (DFS_rec(gay_map , x, y, result, route)==1):
+            result[y][x] = result[curr_y][curr_x] + 1
+            if (DFS_rec(gay_map , x, y, result)==1):
                 return 1
-            elif(DFS_rec(gay_map, x, y, result, route)==-1):
+            elif(DFS_rec(gay_map, x, y, result)==-1):
                 route.pop()
             result[y][x] = N * M + 1
-    return -1
-def DFS (gay_map , start_x, start_y, exit_x, exit_y,route):
+    return -1, route
+def DFS (gay_map , start_x, start_y, exit_x, exit_y):
+    route = []
     route.append((start_y,start_x))
     result = np.full_like(gay_map, len (gay_map)*len (gay_map[0])+1)
     result[start_y][start_x] = 1
-    dfs_output = DFS_rec (gay_map , start_x, start_y, result,route)
+    print ("DFS-ing")
+    dfs_output, route = DFS_rec (gay_map , start_x, start_y, result)
+    print ("Done DFS-ing")
     #print (dfs_output)
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
-    return result
+    return result, route
 
-def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
+def BFS (gay_map , start_x, start_y, exit_x, exit_y):
     N = len (gay_map)
     M = len (gay_map[0])
 
@@ -57,6 +61,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
 
     gay_trace = np.zeros((N,M,2), dtype = np.int8)
     path = []
+    trace = []
     while (queue):
         try:
             nigger = queue.popleft()
@@ -90,8 +95,10 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
                             temp = gay_trace[y][x][0]
                             y = gay_trace[y][x][1]
                             x = temp
-                        trace.reverse()                        
-                        return result
+                        print (trace)
+                        trace.reverse()      
+                        print (trace)                  
+                        return result, trace
                     
                     if (visited[y][x]!=2):
                         gay_trace[y][x][0] = nigger[0]
@@ -113,8 +120,9 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y, trace):
         temp = gay_trace[y][x][0]
         y = gay_trace[y][x][1]
         x = temp
-        
-    return result
+
+    #Cannot Find Exit_x, exit_y, rip bozo
+    return result, trace
 
 def UCS (gay_map , start_x, start_y, exit_x, exit_y):
     N = len (gay_map)
@@ -145,7 +153,7 @@ def UCS (gay_map , start_x, start_y, exit_x, exit_y):
                     continue
                 if (visited[y][x]==0):
                 #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
-                    result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+                    result[y][x] = result[nigger[1]][nigger[0]] + 1
                     if (visited[y][x]!=2):
                         visited[y][x] = 2
                         queue.put((result[y][x], (x, y)))
@@ -182,7 +190,7 @@ def InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1):
                     continue
                 if (visited[y][x]==0):
                 #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
-                    result[y][x] = result[nigger[1]][nigger[0]]+gay_map[y][x]
+                    result[y][x] = result[nigger[1]][nigger[0]] + 1
                     if (visited[y][x]!=2):
                         visited[y][x] = 2
                         #BEST FIRST SEARCH
