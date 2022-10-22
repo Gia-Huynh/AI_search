@@ -6,8 +6,8 @@
 6 5 0
 xxxxxxxxxxxx
      +     x
-x    s     x
-x     +    x
+x          x
+x    s+    x
 x          x
 x          x
 x    +     x
