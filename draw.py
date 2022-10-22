@@ -75,6 +75,25 @@ def read_file(file_name: str = 'maze.txt'):
 
   return bonus_points, matrix
 
+def draw(input_path,output_path, route,algo='bfs'):
+    bonus_points, matrix = read_file('input_path')
+
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if matrix[i][j]=='S' or matrix[i][j]=='s':
+                start=(i,j)
+
+            elif matrix[i][j]==' ':
+                if (i==0) or (i==len(matrix)-1) or (j==0) or (j==len(matrix[0])-1):
+                    end=(i,j)
+                    
+            else:
+                pass
+
+    visualize_maze(matrix,bonus_points,start,end)
+
+
+
 if __name__ == "__main__":
 
     bonus_points, matrix = read_file('maze.txt')
