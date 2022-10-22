@@ -1,0 +1,18 @@
+BestFS dùng hàm khoảng cách Euclid:
+h(x, y) = (x_end - x)^2 + (y_end - y)^2
+
+Astar dùng hàm khoảng cách Lasso:
+h(x, y) = abs(x_end - x) + abs(y_end - y)
+
+Điểm lựa chọn càng gần điểm kết thúc, hàm heuristic của cả hai càng nhỏ.
+BestFS sử dụng hàm heuristic#1 vì thuật toán chỉ quan tâm khoảng cách tới điểm kết thúc, 
+ nhóm sử dụng khoảng cách euclid vì nó ưu tiên điểm ở gần điểm kết thúc theo bán kính, 
+ thay vì theo số bước đi như heuristic#2. 
+Ví dụ: output ở (0, 0), ta xét 2 điểm tiềm năng (5, 5) và (0, 10) 
+ Với heuristic #1, h(5, 5) = 50, h(0, 10) = 100
+ Với heuristic #2, h(5, 5) = h(0, 10) = 10
+
+Astar kết hợp kết quả của hàm heuristic và hàm tổng chi phí tới điểm hiện tại,
+ vì tổng chi phí đến điểm hiện tại được tính bằng khoảng cách lasso,
+ nếu hàm heuristic không dùng lasso mà dùng euclid thì thuật toán Astar
+ sẽ bị thiên vị hàm heuristic so với hàm chi phí.

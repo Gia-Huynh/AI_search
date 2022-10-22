@@ -1,6 +1,6 @@
 Tạo ma trận khoảng cách giữa: [điểm bắt đầu, điểm kết thúc, các điểm thưởng]
 
-Sau đó BFS từ điểm bắt đầu đến điểm kết thúc, có thể qua các điểm thưởng hoặc điểm kết thúc.
+Sau đó BFS từ điểm bắt đầu đến điểm kết thúc, có thể qua các điểm thưởng hoặc đến thẳng điểm kết thúc.
 
 Tại mỗi điểm trong đó, chỉ có 2 lựa chọn, đến một điểm đặc biệt chưa thăm, hoặc đến thẳng điểm kết thúc.
 
