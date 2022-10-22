@@ -70,7 +70,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
     x = 0
     y = 0
 
-    gay_trace = np.zeros((N,M,2), dtype = np.int8)
+    gay_trace = np.zeros((N,M,2), dtype = np.int16)
     path = []
     trace = []
     while (queue):

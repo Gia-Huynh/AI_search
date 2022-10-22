@@ -5,41 +5,35 @@ import MazeDefault
 import MazeReward
 import time
 
-def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
-    SpecialP = bonusP.copy()
+def Generate_Distance_Array (gay_map, forceP, start_x, start_y, exit_x, exit_y):
+    SpecialP = forceP.copy()
     SpecialP.insert (0, [start_y, start_x, 0])
     SpecialP.append ([exit_y, exit_x, 0])
     trace =[]
     num = len(SpecialP)
-    gae = np.zeros ((num, num), dtype = np.int8)
+    gae = np.zeros ((num, num), dtype = np.int16)
     for b in range (0, num-1):
+        test = MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], 0, 0)[0]
         for a in range (b+1, num):
-            gae[b, a] = SpecialP[a][2] + MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[a][1], SpecialP[a][0], trace)[SpecialP[a][0]][SpecialP[a][1]]
-            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]            
+            gae[b, a] = test [SpecialP[a][0]][SpecialP[a][1]] + SpecialP[a][2]
+            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]
     return gae, num, SpecialP
 
-def DFS_MazeForce (DisArr, num, SpecialP, maxTime = 1):
+def VetCan (DisArr, num, SpecialP, maxTime = 1):
     begin_time = time.time()
-    visit = np.zeros(num, dtype = np.int8)
-    visit[0] = 0
-    visit[num-1] = num-1
-    while (True):
-        if time.time()-begin_time > maxTime:
-            print ("Max time exceeded")
-            break
-        if (finalCheck == True):
-            print ("Exhausted all possible solution, exitting")
-            break
-        pass
+    VisitIndex = np.arrange(1,num-1, step=1,dtype = np.int16)
+    print (VisitIndex)
+    cum = np.full_like (VisitIndex, 0,dtype = np.int16)
+    
     
     
 
 def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     #Distance Array
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
-
+    return 0
     if (num<12):
-        DFS_MazeForce
+        VetCan(DisArr, num, SpecialP)
     else:
         #Neu so luong node qua nhieu de DFS het sach, chuyen qua xai heuristic search
         pass

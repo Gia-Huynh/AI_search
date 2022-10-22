@@ -9,11 +9,12 @@ def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     SpecialP.append ([exit_y, exit_x, 0])
     trace =[]
     num = len(SpecialP)
-    gae = np.zeros ((num, num), dtype = np.int8)
+    gae = np.zeros ((num, num), dtype = np.int16)
     for b in range (0, num-1):
+        test = MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], 0, 0)[0]
         for a in range (b+1, num):
-            gae[b, a] = SpecialP[a][2] + MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[a][1], SpecialP[a][0])[0][SpecialP[a][0]][SpecialP[a][1]]
-            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]            
+            gae[b, a] = test [SpecialP[a][0]][SpecialP[a][1]] + SpecialP[a][2]
+            gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]           
     return gae, num, SpecialP
 
 def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
@@ -24,13 +25,13 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     Cost[0] = 0;
 
     #BFS
-    visited = np.zeros((num, num), dtype = np.int8)
-    InQueue = np.zeros(num, dtype = np.int8)
+    visited = np.zeros((num, num), dtype = np.int16)
+    InQueue = np.zeros(num, dtype = np.int16)
     visited[:,0] = 1;
     queue = deque()
     queue.append (0)
     InQueue[0] = 1;
-    trace = np.zeros(num, dtype = np.int8)
+    trace = np.zeros(num, dtype = np.int16)
     while (queue):
         try:
             curr_node = queue.popleft()
