@@ -50,7 +50,7 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
                         queue.append(i)
                         InQueue[i] = 1
         InQueue[i] = 0
-    #print (Cost)
+    print (Cost)
     #print (trace)
     #END BFS
     BFS_Trace = []
@@ -69,7 +69,7 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
             not_reached_end = 0
     BFS_Trace = [list(a) for a in BFS_Trace] #Chuyen ben trong tu tuple (y, x) qua list [y, x]
     BFS_Trace = [a[::-1] for a in BFS_Trace] #Dao nguoc x voi y
-    return Cost[0], BFS_Trace
+    return Cost[num-1], BFS_Trace
 
 if __name__ == "__main__":
     pass

@@ -11,7 +11,7 @@ if __name__ == "__main__":
     gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (FileName)
     route = []
     
-    bonusP = []
+    #bonusP = []
     forceP = []
     
     gay_map = np.array(gay_map)
@@ -20,7 +20,8 @@ if __name__ == "__main__":
         cost, trace = MazeForce.MazeForceSearch(gay_map, forceP, start_x, start_y, exit_x, exit_y)    
     elif (len(bonusP)!=0):
         cost, trace = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
-        pass
+        print (cost)
+        print (trace)
     else:
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)
