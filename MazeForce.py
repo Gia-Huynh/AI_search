@@ -43,6 +43,17 @@ def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
 
 
 
+    if (num<12):
+        DFS_MazeForce
+    else:
+        #Neu so luong node qua nhieu de DFS het sach, chuyen qua xai heuristic search
+        pass
+
+
+
+
+
+
 
     #print (DisArr)
     Cost = np.full(num, np.amax(DisArr)+1)
