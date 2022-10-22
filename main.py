@@ -11,7 +11,7 @@ if __name__ == "__main__":
     gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (FileName)
     route = []
     #bonusP = []
-    forceP = []
+    #forceP = []
     gay_map = np.array(gay_map)
 
     if (len(forceP)!=0):
