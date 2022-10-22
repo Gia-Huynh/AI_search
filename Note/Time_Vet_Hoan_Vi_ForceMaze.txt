@@ -1,0 +1,9 @@
+Thời gian chạy MazeForce vét cạn:
+Chạy 3 lần, lấy thời gian tối đa
+Số đỉnh force  |   Thời gian tối đa (giây)
+3 0.009
+5 0.027
+7 0.1 
+8 0.75 (Gấp 8 lần của 8 điểm)
+9 6.72  (gấp 9 lần của 8 điểm)
+10 Quá lâu (dự báo: 70 giây) (test: 71 giây, 70.6 giây, thôi surevcl khỏi test nữa)
