@@ -3,6 +3,7 @@ from collections import deque
 from queue import PriorityQueue
 gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
 def DFS_rec (gay_map , curr_x, curr_y, result):
+    #print (curr_x,"  ", curr_y)
     route = []
     N = len (gay_map)
     M = len (gay_map[0])
@@ -10,28 +11,38 @@ def DFS_rec (gay_map , curr_x, curr_y, result):
     x = 0
     y = 0
     if (curr_x == 0) or (curr_x == M) or (curr_y == 0) or (curr_y == N):
-        return 1
+        return 1, []
     #print (result)
     for direction in steps:
         if (0<=curr_x + direction[0] < M) and (0<=curr_y+direction[1] < N):
             x = curr_x + direction[0]
             y = curr_y + direction[1]
-            if ((gay_map[y][x]==0) or (result[y][x]<=result[curr_y][curr_x])):
+            
+            if ((gay_map[y][x]==0) or (result[y][x]<=result[curr_y][curr_x]+1)):
                 continue
-            #or (result[y][x] > result[nigger[1]][nigger[0]]+gay_map[y][x]):
+            
             if (y,x) not in route:
                 route.append((y,x))
+                
             result[y][x] = result[curr_y][curr_x] + 1
-            if (DFS_rec(gay_map , x, y, result)==1):
-                return 1
-            elif(DFS_rec(gay_map, x, y, result)==-1):
+            #print (result)
+            dfs_result, dfs_trace = DFS_rec(gay_map , x, y, result)
+            
+            if (dfs_result==1):
+                #print ("result == 1, trace = ", list(dfs_trace))
+                route+=list(dfs_trace)
+                return 1, route
+            
+            elif(dfs_result==-1):
                 route.pop()
-            result[y][x] = N * M + 1
-    return -1, route
+            #result[y][x] = N * M + 1
+    #print (route)
+    return -1, []
 def DFS (gay_map , start_x, start_y, exit_x, exit_y):
     route = []
     route.append((start_y,start_x))
     result = np.full_like(gay_map, len (gay_map)*len (gay_map[0])+1)
+    #result = np.full(gay_map.shape, np.amax(gay_map)+1)
     result[start_y][start_x] = 1
     print ("DFS-ing")
     dfs_output, route = DFS_rec (gay_map , start_x, start_y, result)

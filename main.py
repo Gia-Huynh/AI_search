@@ -9,8 +9,8 @@ FileName = "maze.txt"
 if __name__ == "__main__":
     gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (FileName)
     route = []
-    #bonusP = []
-    #forceP = []
+    bonusP = []
+    forceP = []
     gay_map = np.array(gay_map)
     if (len(bonusP)!=0):
         cost, trace = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
@@ -20,9 +20,9 @@ if __name__ == "__main__":
         pass
     else:
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
+        print (routeDFS)
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)
-        
-        #print (routeBFS)
+        print (routeBFS)
         """
         ucs = MazeDefault.UCS (gay_map, start_x, start_y, exit_x, exit_y)
         bestfs = MazeDefault.InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1)
