@@ -44,9 +44,9 @@ def DFS (gay_map , start_x, start_y, exit_x, exit_y):
     result = np.full_like(gay_map, len (gay_map)*len (gay_map[0])+1)
     #result = np.full(gay_map.shape, np.amax(gay_map)+1)
     result[start_y][start_x] = 1
-    print ("DFS-ing")
+    #print ("DFS-ing")
     dfs_output, route = DFS_rec (gay_map , start_x, start_y, result)
-    print ("Done DFS-ing")
+    #print ("Done DFS-ing")
     #print (dfs_output)
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
     return result, route

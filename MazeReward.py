@@ -50,7 +50,7 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
                         queue.append(i)
                         InQueue[i] = 1
         InQueue[i] = 0
-    print (Cost)
+    #print (Cost)
     #print (trace)
     #END BFS
     BFS_Trace = []
