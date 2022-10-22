@@ -17,6 +17,7 @@ if __name__ == "__main__":
     gay_map = np.array(gay_map)
 
     if (len(forceP)!=0):
+<<<<<<< Updated upstream
         cost, trace = MazeForce.MazeForceSearch(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
         print (cost)
         print (trace)
@@ -25,6 +26,15 @@ if __name__ == "__main__":
         cost, trace = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
         print (cost)
         print (trace)
+=======
+        cost, trace = MazeForce.MazeForceSearch(gay_map, forceP, start_x, start_y, exit_x, exit_y)    
+        print(cost,trace)
+    elif (len(bonusP)!=0):
+        cost, trace = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+        print(cost,trace)
+        #print (trace)
+        pass
+>>>>>>> Stashed changes
     else:
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)

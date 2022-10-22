@@ -22,15 +22,15 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
     #print (DisArr)
     Cost = np.full(num, np.amax(DisArr)+1)
-    Cost[0] = 0;
+    Cost[0] = 0
 
     #BFS
     visited = np.zeros((num, num), dtype = np.int16)
     InQueue = np.zeros(num, dtype = np.int16)
-    visited[:,0] = 1;
+    visited[:,0] = 1
     queue = deque()
     queue.append (0)
-    InQueue[0] = 1;
+    InQueue[0] = 1
     trace = np.zeros(num, dtype = np.int16)
     while (queue):
         try:
