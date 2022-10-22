@@ -1,16 +1,13 @@
-5
+2
 3 6 -5
-7 5 -4
-7 3 0
-1 5 0
-6 5 0
+1 5 -1
 xxxxxxxxxxxx
      +     x
-x    s     x
+x         sx
 x     +    x
 x          x
 x          x
-x    +     x
-x  + +     x
+x          x
+x          x
 x          x
 xxxxxxxxxxxx
