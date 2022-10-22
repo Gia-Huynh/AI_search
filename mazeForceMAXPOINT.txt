@@ -1,0 +1,23 @@
+12
+7 1 0
+7 3 0
+7 5 0
+6 4 0
+7 4 0
+1 5 0
+3 6 0
+3 2 0
+3 3 0
+7 7 0
+6 5 0
+1 6 0
+xxxxxxxxxxxx
+           x
+x    s     x
+x          x
+x          x
+x          x
+x          x
+x          x
+x          x
+xxxxxxxxxxxx
