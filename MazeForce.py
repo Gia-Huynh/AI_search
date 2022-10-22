@@ -2,6 +2,8 @@ import numpy as np
 from collections import deque
 from queue import PriorityQueue
 import MazeDefault
+import MazeReward
+import time
 
 def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     SpecialP = bonusP.copy()
@@ -12,13 +14,32 @@ def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     gae = np.zeros ((num, num), dtype = np.int8)
     for b in range (0, num-1):
         for a in range (b+1, num):
-            gae[b, a] = SpecialP[a][2] + MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[a][1], SpecialP[a][0])[0][SpecialP[a][0]][SpecialP[a][1]]
+            gae[b, a] = SpecialP[a][2] + MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], SpecialP[a][1], SpecialP[a][0], trace)[SpecialP[a][0]][SpecialP[a][1]]
             gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]            
     return gae, num, SpecialP
 
-def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
+def DFS_MazeForce (DisArr, num, SpecialP, maxTime = 1):
+    begin_time = time.time()
+    visit = np.zeros(num, dtype = np.int8)
+    visit[0] = 0
+    visit[num-1] = num-1
+    while (True):
+        if time.time()-begin_time > maxTime:
+            print ("Max time exceeded")
+            break
+        if (finalCheck == True):
+            print ("Exhausted all possible solution, exitting")
+            break
+                    
+        pass
+    
+    
+
+def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     #Distance Array
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+
+
     #print (DisArr)
     Cost = np.full(num, np.amax(DisArr)+1)
     Cost[0] = 0;
@@ -60,15 +81,17 @@ def MazeRewardSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
         father = trace[son]
         BFS_Trace_temp = []
         #[0] = y, [1] = x
-        _, BFS_Trace_temp = MazeDefault.BFS (gay_map, SpecialP[father][1], SpecialP[father][0], SpecialP[son][1], SpecialP[son][0])
+        MazeDefault.BFS (gay_map, SpecialP[father][1], SpecialP[father][0], SpecialP[son][1], SpecialP[son][0], BFS_Trace_temp)
         #Vi ta dang di nguoc nen append vao dau list, cac nut father se o truoc cac nut con
         BFS_Trace = list(BFS_Trace_temp) + BFS_Trace
         son = father
         if (father == 0):
             not_reached_end = 0
+    #BFS_Trace = list (BFS_Trace)
     BFS_Trace = [list(a) for a in BFS_Trace] #Chuyen ben trong tu tuple (y, x) qua list [y, x]
     BFS_Trace = [a[::-1] for a in BFS_Trace] #Dao nguoc x voi y
-    return Cost[0], BFS_Trace
+    #print (BFS_Trace)
+    return Cost[num-1], trace
 
 if __name__ == "__main__":
     pass

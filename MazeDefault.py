@@ -95,9 +95,7 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
                             temp = gay_trace[y][x][0]
                             y = gay_trace[y][x][1]
                             x = temp
-                        print (trace)
-                        trace.reverse()      
-                        print (trace)                  
+                        trace.reverse()                
                         return result, trace
                     
                     if (visited[y][x]!=2):
