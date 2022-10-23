@@ -34,8 +34,11 @@ def makePath (filePath):
 #if __name__ == "__main__":
 if (True):
     if (customInputPath == "none"):
-        customInputPath = "Input"
+        customInputPath = "input"
+        #os.path.join("..","input")
     #DEFAULT MAP
+    #print (customInputPath)
+    #print(glob.glob(customInputPath, recursive = True))
     for filePath in glob.glob (os.path.join(customInputPath, "level_1", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
         #print (filePath)
