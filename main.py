@@ -50,24 +50,33 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(OutputFolderPath, "astar"), exist_ok=True)
         #Run Algo and export to file
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
+        print (routeDFS)
         writeToFile(os.path.join(OutputFolderPath, "dfs", "output.txt"), dfs[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "dfs", "output.jpg"), routeDFS)
         
+        print ("dfs")
+
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "bfs", "output.txt"), bfs[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "bfs", "output.jpg"), routeBFS)
-        
+        print ("dfs")
         ucs, routeUCS = MazeDefault.UCS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "ucs", "output.txt"), ucs[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "ucs", "output.jpg"), routeUCS)
+        print ("dfs")
+
         
         bestfs, routeBESTFS = MazeDefault.InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1)
         writeToFile(os.path.join(OutputFolderPath, "bestfs", "output.txt"), bestfs[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "bestfs", "output.jpg"), routeBESTFS)
+        print ("dfs")
+
         
         astar, routeASTAR = MazeDefault.InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 0)
         writeToFile(os.path.join(OutputFolderPath, "astar", "output.txt"), astar[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "astar", "output.jpg"), routeASTAR)
+        print ("dfs")
+
     #Map with bonus points 
     for filePath in glob.glob (os.path.join(customInputPath, "level_2", "*.txt")):
 

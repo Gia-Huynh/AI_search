@@ -52,7 +52,8 @@ def DFS (gay_map , start_x, start_y, exit_x, exit_y):
     #print ("Done DFS-ing")
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
     route = [(YE[1], YE[0]) for YE in route]
-    route.insert(0,(exit_x, exit_y))
+    if (exit_x>=0) and(exit_y>=0):
+        route.insert(0,(exit_x, exit_y))
     return result, route
 
 def BFS (gay_map , start_x, start_y, exit_x, exit_y):
