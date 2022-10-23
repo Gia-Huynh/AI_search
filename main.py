@@ -30,11 +30,11 @@ def makePath (filePath):
     #print (LevelFolderPath)
     os.makedirs(LevelFolderPath, exist_ok=True)
     return LevelFolderPath
-    
-if __name__ == "__main__":
+
+#if __name__ == "__main__":
+if (True):
     if (customInputPath == "none"):
-        customInputPath = "input"
-    """
+        customInputPath = "Input"
     #DEFAULT MAP
     for filePath in glob.glob (os.path.join(customInputPath, "level_1", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
@@ -85,7 +85,6 @@ if __name__ == "__main__":
         cost, RewardSearch = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "DiemThuong", "output.txt"), cost)
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "DiemThuong", "output.jpg"), RewardSearch)
-    """
     #Map with forced points  
     for filePath in glob.glob (os.path.join(customInputPath, "level_3", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
@@ -93,9 +92,9 @@ if __name__ == "__main__":
         OutputFolderPath = makePath (filePath)
         
         #create algorithm's folder
-        #os.makedirs(os.path.join(OutputFolderPath, "algo1_vetcan"), exist_ok=True)
-        #os.makedirs(os.path.join(OutputFolderPath, "algo2_heuristic"), exist_ok=True)
-        #os.makedirs(os.path.join(OutputFolderPath, "algo3_kethop"), exist_ok=True)
+        os.makedirs(os.path.join(OutputFolderPath, "algo1_vetcan"), exist_ok=True)
+        os.makedirs(os.path.join(OutputFolderPath, "algo2_heuristic"), exist_ok=True)
+        os.makedirs(os.path.join(OutputFolderPath, "algo3_kethop"), exist_ok=True)
     
         
         costVC, Vetcan = MazeForce.MazeForceSearchVetCan(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 5)
@@ -110,6 +109,10 @@ if __name__ == "__main__":
         #print (Smart)
         writeToFile(os.path.join(OutputFolderPath, "algo3_kethop", "output.txt"), costSmart)
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "algo3_kethop", "output.jpg"), Smart)
+    for filePath in glob.glob (os.path.join(customInputPath, "advance", "*.txt")):
+        #gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
+        #Create big level_xxx folder
+        OutputFolderPath = makePath (filePath)
 
 
     
