@@ -88,7 +88,7 @@ def StupidBFS (DisArr, num, SpecialP, maxTime):
     Visited[0] = 1
     #count = 1
     selected = 0
-    asmgljaf=np.amax(DisArr)
+    asmgljaf=np.amax(DisArr)+1 #Very big number
     while (len(VisitIndex)!=num-1):
         MinCost = asmgljaf
         for i in range (0, num-1):
@@ -114,7 +114,7 @@ def SmartBFS (DisArr, num, SpecialP, maxTime):
         #    Visited[startIdx] = 1
         Cost = 0
         selected = 0
-        gayMax = np.amax(DisArr)
+        gayMax = np.amax(DisArr)+1
         while (len(VisitIndex)!=len(List)+1):
             MinCost = gayMax
             for j in range (0, len(List)):
