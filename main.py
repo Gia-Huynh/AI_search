@@ -34,7 +34,7 @@ def makePath (filePath):
 if __name__ == "__main__":
     if (customInputPath == "none"):
         customInputPath = "input"
-        
+    """
     #DEFAULT MAP
     for filePath in glob.glob (os.path.join(customInputPath, "level_1", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
@@ -85,29 +85,31 @@ if __name__ == "__main__":
         cost, RewardSearch = MazeReward.MazeRewardSearch(gay_map, bonusP, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "DiemThuong", "output.txt"), cost)
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "DiemThuong", "output.jpg"), RewardSearch)
-        
+    """
     #Map with forced points  
     for filePath in glob.glob (os.path.join(customInputPath, "level_3", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
-        """print (filePath)
-        print (gay_map)
-        for a in range (0, len(gay_map)):
-            print (len(gay_map[a]))"""
         #Create big level_xxx folder
         OutputFolderPath = makePath (filePath)
         
         #create algorithm's folder
-        os.makedirs(os.path.join(OutputFolderPath, "algo1_vetcan"), exist_ok=True)
-        os.makedirs(os.path.join(OutputFolderPath, "algo2_heuristic"), exist_ok=True)
-        os.makedirs(os.path.join(OutputFolderPath, "algo3_kethop"), exist_ok=True)
+        #os.makedirs(os.path.join(OutputFolderPath, "algo1_vetcan"), exist_ok=True)
+        #os.makedirs(os.path.join(OutputFolderPath, "algo2_heuristic"), exist_ok=True)
+        #os.makedirs(os.path.join(OutputFolderPath, "algo3_kethop"), exist_ok=True)
     
         
-        costVC, Vetcan = MazeForce.MazeForceSearchVetCan(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
+        costVC, Vetcan = MazeForce.MazeForceSearchVetCan(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 5)
         writeToFile(os.path.join(OutputFolderPath, "algo1_vetcan", "output.txt"), costVC)    
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "algo1_vetcan", "output.jpg"), Vetcan)
         
-        costHeu, ForceSearch = MazeForce.MazeForceSearchHeuristic(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
+        costHeu, Heuristic = MazeForce.MazeForceSearchHeuristic(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 5)
         writeToFile(os.path.join(OutputFolderPath, "algo2_heuristic", "output.txt"), costHeu)
-        draw.drawImage (filePath, os.path.join(OutputFolderPath, "algo2_heuristic", "output.jpg"), ForceSearch)
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "algo2_heuristic", "output.jpg"), Heuristic)
+        
+        costSmart, Smart = MazeForce.MazeForceSearchSmart(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 5)
+        #print (Smart)
+        writeToFile(os.path.join(OutputFolderPath, "algo3_kethop", "output.txt"), costSmart)
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "algo3_kethop", "output.jpg"), Smart)
+
 
     
