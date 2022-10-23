@@ -100,6 +100,9 @@ def StupidBFS (DisArr, num, SpecialP, maxTime):
 def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y, maxTime = 7.5):
     #Distance Array
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+    print (DisArr)
+    print (num)
+    print (SpecialP)
     MinTime = 10
     BestVisitIndex = []
 

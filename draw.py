@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import os
-import matplotlib.pyplot as plt
-
-def visualize_maze(matrix, bonus, start, end, route=None):
-=======
 from fileinput import filename
 import os
 import matplotlib.pyplot as plt
@@ -11,7 +5,6 @@ from SupportFunction import *
 
 
 def visualize_maze(matrix, bonus, start, end, route=None, algo: str = 'dfs'):
->>>>>>> Stashed changes
     """
     Args:
       1. matrix: The matrix read from the input file,
@@ -59,22 +52,10 @@ def visualize_maze(matrix, bonus, start, end, route=None, algo: str = 'dfs'):
     plt.text(end[1],-end[0],'EXIT',color='red',
          horizontalalignment='center',
          verticalalignment='center')
-    plt.xticks([])
+    plt.xticks([])  
     plt.yticks([])
-<<<<<<< Updated upstream
-    plt.savefig("output.jpg")
-    plt.show()
-    
-
-    print(f'Starting point (x, y) = {start[0], start[1]}')
-    print(f'Ending point (x, y) = {end[0], end[1]}')
-    
-    for _, point in enumerate(bonus):
-      print(f'Bonus point at position (x, y) = {point[0], point[1]} with point {point[2]}')
-=======
     plt.savefig(algo + ".jpg")
     plt.show()
->>>>>>> Stashed changes
 
 def read_file(file_name: str = 'maze.txt'):
   f=open(file_name,'r')
@@ -87,6 +68,33 @@ def read_file(file_name: str = 'maze.txt'):
   text=f.read()
   matrix=[list(i) for i in text.splitlines()]
   f.close()
+  #github conflict
+  start = []
+  end = []
+  for i in range(len(matrix)):
+    for j in range(len(matrix[0])):
+        if matrix[i][j]=='s' or matrix[i][j]=='S' :
+            # temp = []
+            # temp.append(i)
+            # temp.append(j)
+            start.append(i)
+            start.append(j)
+            start = tuple(start)
+        elif matrix[i][j]==' ':
+            if (i==0) or (i==len(matrix)-1) or (j==0) or (j==len(matrix[0])-1):
+                end.append(i)
+                end.append(j)
+                end = tuple(end)
+            pass
+    print(start,end)
+  return bonus_points, matrix, start, end
+
+
+bonus_points, matrix, start, end = read_file('maze.txt')
+# chay thuat toan lay route va thay vào hàm bên dưới khúc route = 
+visualize_maze(matrix,bonus_points,start,end,route=None,algo='bfs')
+
+  """
 <<<<<<< Updated upstream
 
   return bonus_points, matrix
@@ -151,6 +159,5 @@ if __name__ == "__main__":
 
 bonus_points, matrix, start, end = read_file('maze.txt')
 # chay thuat toan lay route va thay vào hàm bên dưới khúc route = 
-visualize_maze(matrix,bonus_points,start,end,route=None,algo='bfs')
+visualize_maze(matrix,bonus_points,start,end,route=None,algo='bfs')"""
 
->>>>>>> Stashed changes
