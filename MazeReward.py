@@ -3,6 +3,54 @@ from collections import deque
 from queue import PriorityQueue
 import MazeDefault
 
+
+
+def BFS_reward (gay_map, start_x, start_y, bonusP):
+    N = len (gay_map)
+    M = len (gay_map[0])
+    visited = np.full_like(gay_map, 0)    
+    result = np.full_like(gay_map, 0)
+    steps = np.array([[1,0],[-1,0],[0,1],[0,-1]])
+ 
+    queue = deque()
+    queue.append ((start_x, start_y))
+    x = 0
+    y = 0
+
+    #Tracing
+    #gay_trace = np.zeros((N,M,2), dtype = np.int16)
+    #path = []
+    #trace = []
+    while (queue):
+        try:
+            nigger = queue.popleft()
+        except:
+            return result
+        for direction in steps:
+            if (0<=(nigger + direction)[0] < M) and (0<=(nigger + direction)[1] < N):
+                x, y = (nigger + direction)
+                if (gay_map[y][x]==0):
+                    continue
+                if ((visited[y][x]==0) or (result[y][x] > result[nigger[1]][nigger[0]]+1)):
+                    result[y][x] = result[nigger[1]][nigger[0]]+1
+                        #[0] = x; [1] = y;
+                    check = False
+                    for a in bonusP:
+                        if (a[0], a[1]) == (y, x):
+                            check = True
+                        
+                    if (visited[y][x] != 2):
+                        visited[y][x] = 2
+                        if (check == False):
+                            queue.append((x, y))
+            else:
+                continue
+            visited[nigger[1]][nigger[0]] = 1 #da tham
+        
+    return result
+
+
+
 def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     SpecialP = bonusP.copy()
     SpecialP.insert (0, [start_y, start_x, 0])
@@ -11,7 +59,8 @@ def Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y):
     num = len(SpecialP)
     gae = np.zeros ((num, num), dtype = np.int16)
     for b in range (0, num-1):
-        test = MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], 0, 0)[0]
+        test = BFS_reward(gay_map, SpecialP[b][1], SpecialP[b][0], bonusP)
+        #test = MazeDefault.BFS(gay_map, SpecialP[b][1], SpecialP[b][0], 0,0)[0]
         for a in range (b+1, num):
             gae[b, a] = test [SpecialP[a][0]][SpecialP[a][1]] + SpecialP[a][2]
             gae[a, b] = gae[b, a] - SpecialP[a][2] + SpecialP[b][2]           

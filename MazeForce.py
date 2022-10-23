@@ -166,7 +166,7 @@ def SmartBFS (DisArr, num, SpecialP, maxTime):
     DistinctGroups = num    
     for a in sortedIndices:
         #khong sinh hoan vi group bat dau va group ket thuc, do vi tri la co dinh, max sinh duoc hoan vi cua 8 group
-        if (DistinctGroups <= 10):
+        if (DistinctGroups <= 9):
             break
         if (nigger[a] == 0):
             continue

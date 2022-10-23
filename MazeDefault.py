@@ -193,7 +193,7 @@ def HeuristicFunction (curr_x, curr_y, exit_x, exit_y):
     return ((exit_x-curr_x)**2 + (exit_y-curr_y)**2)
 def HeuristicFunctionAstar (curr_x, curr_y, exit_x, exit_y):
     return (abs(exit_x-curr_x)+abs(exit_y-curr_y))
-def InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1):
+def InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1, choice = 0):
     N = len (gay_map)
     M = len (gay_map[0])
     visited = np.full_like(gay_map, 0)
@@ -251,11 +251,17 @@ def InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1):
                     gay_trace[y][x][1] = nigger[1]
                     #BEST FIRST SEARCH
                     if (bestFirst == 1):
-                        queue.put((HeuristicFunction(x, y, exit_x, exit_y), (x, y)))
+                        if (choice == 0):
+                            queue.put((HeuristicFunction(x, y, exit_x, exit_y), (x, y)))
+                        else:
+                            queue.put((HeuristicFunctionAstar(x, y, exit_x, exit_y), (x, y)))
                     #A STAR
                     #
                     if (bestFirst == 0):
-                        queue.put((result[y][x] + HeuristicFunctionAstar(x, y, exit_x, exit_y), (x, y)))
+                        if (choice == 0):
+                            queue.put((result[y][x] + HeuristicFunctionAstar(x, y, exit_x, exit_y), (x, y)))
+                        else:
+                            queue.put((result[y][x] + HeuristicFunction(x, y, exit_x, exit_y), (x, y)))
             else:
                 continue
             visited[nigger[1]][nigger[0]] = 1
