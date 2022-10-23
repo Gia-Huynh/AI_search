@@ -97,21 +97,23 @@ def StupidBFS (DisArr, num, SpecialP, maxTime):
     #print (TinhToan (DisArr, num, VisitIndex))
     return TinhToan (DisArr, num, VisitIndex), VisitIndex
             
-def MazeForceSearch (gay_map, bonusP, start_x, start_y, exit_x, exit_y, maxTime = 7.5):
+def MazeForceSearchVetCan (gay_map, bonusP, start_x, start_y, exit_x, exit_y, maxTime = 7.5):
     #Distance Array
     DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
-    print (DisArr)
-    print (num)
-    print (SpecialP)
-    MinTime = 10
+    MinTime = 0
     BestVisitIndex = []
-
     #Neu so luong node qua nhieu de DFS het sach, chuyen qua xai heuristic search
     if (len(bonusP)<10):
         MinTime, BestVisitIndex = VetCan(DisArr, num, SpecialP, maxTime = maxTime)
-    else:
-        MinTime, BestVisitIndex = StupidBFS(DisArr, num, SpecialP, maxTime = maxTime)
-    #print (BestVisitIndex)
+    return MinTime, Generate_Array_From_Trace (gay_map, SpecialP, BestVisitIndex)
+
+            
+def MazeForceSearchHeuristic (gay_map, bonusP, start_x, start_y, exit_x, exit_y, maxTime = 7.5):
+    #Distance Array
+    DisArr, num, SpecialP = Generate_Distance_Array (gay_map, bonusP, start_x, start_y, exit_x, exit_y)
+    MinTime = 10
+    BestVisitIndex = []
+    MinTime, BestVisitIndex = StupidBFS(DisArr, num, SpecialP, maxTime = maxTime)
     return MinTime, Generate_Array_From_Trace (gay_map, SpecialP, BestVisitIndex)
 
 if __name__ == "__main__":

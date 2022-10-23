@@ -49,7 +49,7 @@ def ReadFile (filename):
                         exit_y = inverse_gay_map[len(inverse_gay_map)-1].index(1)
                         exit_x = len(inverse_gay_map)-1
                     except:
-                        print ("Can not find exit location")
+                        #print ("Can not find exit location")
                         pass
 
         return gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y

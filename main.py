@@ -7,6 +7,7 @@ import MazeDefault
 import MazeReward
 import MazeForce
 import SupportFunction
+import draw
 #gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
 #fileName = "mazeForceMAXPOINT.txt"
 customInputPath = "none"
@@ -37,6 +38,7 @@ if __name__ == "__main__":
     #DEFAULT MAP
     for filePath in glob.glob (os.path.join(customInputPath, "level_1", "*.txt")):
         gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
+        print (filePath)
         #Create big level_xxx folder
         OutputFolderPath = makePath (filePath)
         
@@ -47,21 +49,26 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(OutputFolderPath, "bestfs"), exist_ok=True)
         os.makedirs(os.path.join(OutputFolderPath, "astar"), exist_ok=True)
         #Run Algo and export to file
-        #asdasd
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "dfs", "output.txt"), dfs[exit_y][exit_x])
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "dfs", "output.jpg"), routeDFS)
+        #print (routeDFS)
         
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "bfs", "output.txt"), bfs[exit_y][exit_x])
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "bfs", "output.jpg"), routeBFS)
         
         ucs, routeUCS = MazeDefault.UCS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "ucs", "output.txt"), ucs[exit_y][exit_x])
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "ucs", "output.jpg"), routeUCS)
         
         bestfs, routeBESTFS = MazeDefault.InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 1)
         writeToFile(os.path.join(OutputFolderPath, "bestfs", "output.txt"), bestfs[exit_y][exit_x])
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "bestfs", "output.jpg"), routeBESTFS)
         
         astar, routeASTAR = MazeDefault.InformedSearch (gay_map, start_x, start_y, exit_x, exit_y, bestFirst = 0)
         writeToFile(os.path.join(OutputFolderPath, "astar", "output.txt"), astar[exit_y][exit_x])
+        draw.drawImage (filePath, os.path.join(OutputFolderPath, "astar", "output.jpg"), routeASTAR)
     #Map with bonus points 
     for filePath in glob.glob (os.path.join(customInputPath, "level_2", "*.txt")):
 
@@ -78,11 +85,11 @@ if __name__ == "__main__":
         
     #Map with forced points  
     for filePath in glob.glob (os.path.join(customInputPath, "level_3", "*.txt")):
-        print (filePath)
+        gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
+        """print (filePath)
         print (gay_map)
         for a in range (0, len(gay_map)):
-            print (len(gay_map[a]))
-        gay_map, bonusP, forceP, start_x, start_y, exit_x, exit_y = SupportFunction.ReadFile (filePath)
+            print (len(gay_map[a]))"""
         #Create big level_xxx folder
         OutputFolderPath = makePath (filePath)
         
@@ -92,7 +99,9 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(OutputFolderPath, "algo3_kethop"), exist_ok=True)
     
         
-        cost, ForceSearch = MazeForce.MazeForceSearch(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
-        writeToFile(os.path.join(OutputFolderPath, "algo1_vetcan", "output.txt"), cost)
+        costVC, Vetcan = MazeForce.MazeForceSearchVetCan(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
+        writeToFile(os.path.join(OutputFolderPath, "algo1_vetcan", "output.txt"), costVC)     
+        costHeu, ForceSearch = MazeForce.MazeForceSearchHeuristic(gay_map, forceP, start_x, start_y, exit_x, exit_y, maxTime = 7.5)
+        writeToFile(os.path.join(OutputFolderPath, "algo2_heuristic", "output.txt"), costHeu)
 
     
