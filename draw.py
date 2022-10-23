@@ -28,7 +28,7 @@ def visualize_maze(matrix, bonus, start, end, route, OutputFilePath):
                 direction.append('<')
 
         direction.pop(0)
-
+    
     #2. Drawing the map
     ax=plt.figure(dpi=100).add_subplot(111)
 
