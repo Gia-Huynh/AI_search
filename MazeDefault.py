@@ -3,14 +3,17 @@ from collections import deque
 from queue import PriorityQueue
 gay_dict = {'x': 0, ' ': 1, 'S': 2, 's': 2, '+': 3}
 def DFS_rec (gay_map , curr_x, curr_y, result):
-    #print (curr_x,"  ", curr_y)
     route = []
     N = len (gay_map)
     M = len (gay_map[0])
+    #print (curr_x,"  ", M)
+    #print (curr_y,"  ", N)
     steps = np.array([[1,0],[-1,0],[0,1],[0,-1]])
     x = 0
     y = 0
-    if (curr_x == 0) or (curr_x == M) or (curr_y == 0) or (curr_y == N):
+    #if (curr_x == 0) or (curr_x == M) or (curr_y == 0) or (curr_y == N):
+    if (curr_x == 0) or (curr_x == M-1) or (curr_y == 0) or (curr_y == N-1):
+        #print ("FOUND")
         return 1, []
     #print (result)
     for direction in steps:
@@ -29,7 +32,7 @@ def DFS_rec (gay_map , curr_x, curr_y, result):
             dfs_result, dfs_trace = DFS_rec(gay_map , x, y, result)
             
             if (dfs_result==1):
-                #print ("result == 1, trace = ", list(dfs_trace))
+                #print (route)
                 route+=list(dfs_trace)
                 return 1, route
             
@@ -47,8 +50,9 @@ def DFS (gay_map , start_x, start_y, exit_x, exit_y):
     #print ("DFS-ing")
     dfs_output, route = DFS_rec (gay_map , start_x, start_y, result)
     #print ("Done DFS-ing")
-    #print (dfs_output)
     result[result == len (gay_map)*len (gay_map[0])+1] = 0
+    route = [(YE[1], YE[0]) for YE in route]
+    route.insert(0,(exit_x, exit_y))
     return result, route
 
 def BFS (gay_map , start_x, start_y, exit_x, exit_y):
@@ -118,17 +122,6 @@ def BFS (gay_map , start_x, start_y, exit_x, exit_y):
                 continue
             visited[nigger[1]][nigger[0]] = 1
         path.append(curr)
-        
-    x = exit_x
-    y = exit_y
-    temp = 0
-    trade = []
-    while ((x!=0) and (y!=0)):
-        trace.append((x, y))
-        temp = gay_trace[y][x][0]
-        y = gay_trace[y][x][1]
-        x = temp
-
     #Cannot Find Exit_x, exit_y, rip bozo
     return result, trace
 

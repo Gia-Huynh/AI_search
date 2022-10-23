@@ -59,6 +59,7 @@ def visualize_maze(matrix, bonus, start, end, route, OutputFilePath):
     plt.yticks([])
     #plt.savefig(algo + ".jpg")
     plt.savefig (OutputFilePath)
+    plt.close('all')
     #plt.show()
 
 def read_file(file_name: str = 'maze.txt'):
@@ -95,7 +96,7 @@ def read_file(file_name: str = 'maze.txt'):
   return bonus_points, matrix, start, end
 
 def drawImage (textInputPath, OutputFilePath, route):
-    print (route," ",OutputFilePath)
+    #print (route," ",OutputFilePath)
     bonus_points, matrix, start, end = read_file(textInputPath)
     visualize_maze(matrix,bonus_points,start,end, route, OutputFilePath)
 

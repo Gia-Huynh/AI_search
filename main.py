@@ -52,7 +52,6 @@ if __name__ == "__main__":
         dfs, routeDFS = MazeDefault.DFS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "dfs", "output.txt"), dfs[exit_y][exit_x])
         draw.drawImage (filePath, os.path.join(OutputFolderPath, "dfs", "output.jpg"), routeDFS)
-        #print (routeDFS)
         
         bfs, routeBFS = MazeDefault.BFS (gay_map, start_x, start_y, exit_x, exit_y)
         writeToFile(os.path.join(OutputFolderPath, "bfs", "output.txt"), bfs[exit_y][exit_x])
