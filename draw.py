@@ -50,7 +50,7 @@ def visualize_maze(matrix, bonus, start, end, route, OutputFilePath):
                         marker=direction[i],color='silver')
 
     try:
-        plt.text(end[1], end[0],'EXIT',color='red',
+        plt.text(end[1], -end[0],'EXIT',color='red',
              horizontalalignment='center',
              verticalalignment='center')
     except:
